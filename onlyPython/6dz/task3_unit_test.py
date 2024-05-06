@@ -2,6 +2,7 @@ import unittest, time
 
 from task3 import factorial
 
+### У меня vscode, поэтому непосредственно увидеть результаты запуска я не смог, но вижу, что создался pycache, так что буду надеяться, что все работает как надо
 class TestFactorial(unittest.TestCase):
     def setUp(self) -> None:
         print("setUp")
