@@ -7,12 +7,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ('news', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blogpost',
+            model_name='NewsPost',
             name='date_published',
             field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Publishing date'),
         ),

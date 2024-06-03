@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'news/css/layout.css' %}" />
+    {% block static%} {% endblock %}
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="left_side">
+        <a class="btn btn-primary" href="{% url 'news:index' %}">Главная</a>
+        <a class="btn btn-primary" href="">Контакты</a>
+        <a
+          style="
+            font-size: 35;
+            color: black;
+            text-decoration: none;
+            margin-left: 50;
+          "
+          >{{ title }}</a
+        >
+        <!-- Dobavit' -->
+      </div>
+      <div class="right_side">
+        {% if user.is_authenticated %}
+        <p>Привет, {{user.username}}</p>
+        <a class="btn btn-danger" href="">Выход</a>
+        {% else %}
+        <a class="btn btn-success" href="">Вход</a>
+        <a class="btn btn-primary" href="">Регистрация</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div style="height: 6%"></div>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

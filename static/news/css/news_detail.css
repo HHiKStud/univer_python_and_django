@@ -1,0 +1,30 @@
+.news_detail {
+    display: flex;
+    padding: 1%;
+    flex-direction: column;
+}
+
+img {
+    max-width: 50%;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-right: 1%;
+}
+
+.news_detail a{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 30px;
+}
+.content {
+    display: flex;
+    font-size: 20px;
+}
+
+.content a {
+    color: lightgrey;
+    text-decoration: none;
+    text-shadow: purple 1px 0 20px;
+
+}

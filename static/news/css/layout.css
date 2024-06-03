@@ -1,0 +1,35 @@
+.header {
+    position: fixed;
+    width: 100%;
+    border-bottom: 1px solid;
+    z-index: 1;
+    height: 5%;
+    display: flex;
+    background: white;
+}
+
+.left_side, .right_side {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.left_side {
+    width: 80%;
+}
+
+.right_side {
+    width: 20%;
+    justify-content: space-around;
+    background: linear-gradient(90deg, white 1%, #3f3853);
+}
+
+.btn {
+    margin-right: 15px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(270deg, #3e3853, #682337);
+}

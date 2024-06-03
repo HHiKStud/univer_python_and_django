@@ -1,0 +1,23 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %} Blog {% endblock %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'news/css/news_detail.css' %}"
+{% endblock %}
+
+<div>
+    {% block content %}
+        <div class="news_detail">
+            <div class="content">
+                <img src="{{ news.image.url }}">
+                <div><a>{{ news.content }}</a></div>
+            </div>
+            <div class="news_info">
+                <a>{{ news.author }}</a>
+                <a>{{ news.date_published }}</a>
+            </div>
+        </div>
+    {% endblock %}
+</div>
