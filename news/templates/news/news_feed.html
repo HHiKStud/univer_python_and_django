@@ -1,7 +1,7 @@
 {% extends "news/layout.html" %}
 {% load static %}
 
-{% block title %} Blog {% endblock %}
+{% block title %} News Feed {% endblock %}
 
 {% block static %}
 <link rel="stylesheet" href="{% static 'news/css/news_feed.css' %}"
@@ -9,27 +9,53 @@
 
 <div>
     {% block content %}
+    {% if user.is_superuser %}
+        <a class="btn btn-success" href="{% url 'news:create_post' %}" style="margin: 1% 0 0 2%">Создать пост</a>
+    {% endif %}
+    <form method="GET">
+        <input type="text" name="search" placeholder="Поиск">
+        <input type="submit" value="Найти">
+    </form>    
         <div class="list">
-            {% for post in news %}
+            {% for post in page_obj %}
                 <div class="post" style="
-                    background: url({{post.image.url}} ) no-repeat;
-                    background-position: center;
-                    background-size: cover;                        
+                    background-image: url({{post.image.url}}) no-repeat;
+                    background-position: right;
                 ">
-                    <div class="post_header">
-                        <div class="post_title">
-                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                        </div>
-                        <div class="post_info">
-                            <a>{{ post.author }}</a>
-                            <a>{{ post.date_published }}</a>
-                        </div>
+                    <div class="post_title">
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                     </div>
                     <div class="post_content">
-                        {{ post.content }}
+                        {{ post.content | truncatechars:100 }}
                     </div>
+                    <div class="post_info">
+                        <a>{{ post.author }}</a>
+                        <a>{{ post.date_published }}</a>
+                    </div>
+                    {% if user.is_superuser %}
+                        <a class="btn btn-outline-warning"
+                            href="{% url 'news:update_post' pk=post.id %}" style="margin: 1% 0 0 2%"><i class="fa fa-pen"></i></a>
+                    {% endif %}
                 </div>
-            {% endfor %}
+                <hr>
+                {% endfor %}
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
         </div>
     {% endblock %}
 </div>
